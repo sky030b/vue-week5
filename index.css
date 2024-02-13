@@ -1,0 +1,10 @@
+.disable {
+    cursor: not-allowed;
+}
+
+.scroll-forbidden {
+    height: 100vh;
+    overflow: hidden
+}
+
+/* 其實這個檔案完全沒用...= = */
