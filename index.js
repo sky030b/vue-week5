@@ -44,9 +44,7 @@ const app = Vue.createApp({
                     this.allProducts = res.data.products;
                 })
                 .catch(err => {
-                    alert(`${err.data.message}\n將返回登入頁。`);
-                    delete axios.defaults.headers.common["Authorization"];
-                    window.location = "./login.html";
+                    alert(err.data.message);
                 })
         },
         getPageProducts(page = 1) {
@@ -54,12 +52,9 @@ const app = Vue.createApp({
                 .then(res => {
                     this.pageProducts = res.data.products;
                     this.pagination = res.data.pagination;
-                    console.log(this.pageProducts)
                 })
                 .catch(err => {
-                    alert(`${err.data.message}\n將返回登入頁。`);
-                    delete axios.defaults.headers.common["Authorization"];
-                    window.location = "./login.html";
+                    alert(err.data.message);
                 })
         },
         getCart() {
@@ -67,7 +62,6 @@ const app = Vue.createApp({
             axios.get(`${this.api.url}/api/${this.api.path}/cart`)
                 .then((res) => {
                     this.cart = res.data.data;
-                    console.log(res.data.data);
                     setTimeout(() => {
                         this.isLoading = false;
                     }, 600)

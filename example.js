@@ -1,4 +1,4 @@
-import userProductModal from './userProductModal.js';
+import userProductModal from './components/userProductModal.js';
 
 const { defineRule, Form, Field, ErrorMessage, configure } = VeeValidate;
 const { required, email, min, max } = VeeValidateRules;
