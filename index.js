@@ -22,7 +22,9 @@ const app = Vue.createApp({
                 id: "",
                 deleteId: ""
             },
-            cart: {},
+            cart: {
+                carts: []
+            },
             coupon: false,
             form: {
                 user: {
@@ -143,6 +145,11 @@ const app = Vue.createApp({
                 })
         },
         createOrder() {
+            if (this.cart.carts.length === 0) {
+                alert("目前購物車為空，請先新增商品至購物車。")
+                return
+            }
+            console.log(234234)
             const order = this.form;
             axios.post(`${this.api.url}/api/${this.api.path}/order`, { data: order })
                 .then((res) => {

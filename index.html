@@ -78,9 +78,36 @@
                 <pagination :pagination="pagination" :get-page-products="getPageProducts"></pagination>
 
                 <!-- 購物車列表 -->
-                <div class="text-end">
-                    <button class="btn btn-outline-danger" type="button" @click="deleteAllCarts">清空購物車</button>
+                <div class="text-end" v-if="cart.carts.length">
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal"
+                            data-bs-target="#clearCarts">清空購物車</button>
                 </div>
+                <div class="text-end" v-else>
+                    <button class="btn btn-outline-secondary" type="button" disabled>購物車內暫無商品</button>
+                </div>
+
+                <!-- 確認清空購物車Modal -->
+                <div class="modal fade" tabindex="-1" id="clearCarts" aria-labelledby="clearCartsLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">請問是否確定要<span class="text-danger fw-bold">清空購物車</span>？</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>此操作將不可回復。</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消操作</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                        @click="deleteAllCarts">確認清除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 確認清空購物車Modal -->
+
                 <table class="table align-middle">
                     <thead>
                         <tr>
@@ -197,11 +224,11 @@
     </div>
     <script type="text/x-template" id="userProductModal">
         <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
+            aria-labelledby="productModalLabel" aria-hidden="true" ref="modal">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content border-0">
                     <div class="modal-header bg-dark text-white">
-                        <h5 class="modal-title" id="exampleModalLabel">
+                        <h5 class="modal-title" id="productModalLabel">
                         <span>{{ productTemp.title }}</span>
                         </h5>
                         <button type="button" class="btn-close btn-close-white"
